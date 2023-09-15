@@ -42,16 +42,22 @@ const Passenger = () => {
     }
   }, [id]);
 
-  const deletePassenger = () => {
+  useEffect(() => {
+    deletePassenger();
+  }, []);
+
+  const deletePassenger = async() => {
     if (!passenger) {
       return;
     }
 
-    axios
-      .delete(`http://localhost:3020/passengers/${passenger.id}`)
+    await axios
+    //   .delete(`http://localhost:3020/passengers/${passenger.id}`)
+    .delete(`http://localhost:3020/passengers/${id}`)
       .then(() => {
         console.log('Passenger deleted successfully.');
         setPassenger(null);
+        
       })
       .catch((error) => {
         console.error('Error deleting passenger:', error);
@@ -65,7 +71,8 @@ const Passenger = () => {
 
   const fetchData = () => {
     axios
-      .get('http://localhost:3020/passengers/${passenger.id}')
+    //   .get('http://localhost:3020/passengers/${passenger.id}')
+        .get(`http://localhost:3020/passengers/${id}`)
       .then((response) => {
         setPassenger(response.data);
       })
@@ -74,16 +81,18 @@ const Passenger = () => {
       });
   };
 
-  const updatePassengerName = () => {
+
+
+  const updatePassengerName = async() => {
     if (!passenger || !newName) {
       return;
     }
 
-    axios
-      .put(`http://localhost:3020/passengers/${passenger.id}`, {
+   await axios
+      .patch(`http://localhost:3020/passengers/${passenger.id}`, {
         name: newName,
       })
-      .then(() => {
+     .then(() => {
         console.log('Passenger name updated successfully.');
         fetchData();
         setNewName('');

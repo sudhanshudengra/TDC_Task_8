@@ -14,7 +14,7 @@ export default function Home() {
       {/* <Header /> */}
       <h1 className="text-4xl font-bold text-center text-orange-600 font-serif"> Welcome to Airport App</h1>
       <div className="flex flex-col items-center justify-center mt-4">
-        <Image src="/airport.jpg" alt="airport" width={400} height={400} />
+        <Image className='rounded-2xl' src="/airport_gif.gif" alt="airport" width={400} height={400} />
       </div>
     </div>
     <Footer />
